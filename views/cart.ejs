@@ -20,7 +20,7 @@
   <body>
     <h1 class="ps-2 pt-3">Cart Summary</h1>
     <h5 class="ps-3">
-      <a class="text-decoration-none" href="/product">Add New Product</a>
+      <a class="text-decoration-none" href="/prod/product">Add New Product</a>
     </h5>
     <ol class="ps-4">
       <% allProducts.map((product)=>{ %>
@@ -59,7 +59,11 @@
             Edit
           </button>
 
-          <form style="display: inline-block" action="/delete" method="POST">
+          <form
+            style="display: inline-block"
+            action="/prod/delete"
+            method="POST"
+          >
             <input type="hidden" value="<%=product._id%>" name="id" />
             <button class="btn btn-sm btn-danger py-2 px-3 text-white ms-2">
               Delete
@@ -88,7 +92,11 @@
                 aria-label="Close"
               ></button>
             </div>
-            <form style="display: inline-block" action="/edit" method="POST">
+            <form
+              style="display: inline-block"
+              action="/prod/edit"
+              method="POST"
+            >
               <div class="modal-body">
                 <input type="text" value="<%=product._id%>" name="id" />
 
