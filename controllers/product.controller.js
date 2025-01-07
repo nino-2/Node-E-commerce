@@ -15,8 +15,8 @@ const displayAddup = (req, res) => {
   var transporter = nodemailer.createTransport({
     service: "gmail",
     auth: {
-      user: process.dotenv.GMAIL_USER,
-      pass: process.dotenv.GMAIL_PASS,
+      user: process.env.GMAIL_USER,
+      pass: process.env.GMAIL_PASS,
     },
   });
 
