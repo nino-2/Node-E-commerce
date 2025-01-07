@@ -2,6 +2,7 @@ const express = require("express");
 const app = express();
 const PORT = 5002;
 const mongoose = require("mongoose");
+require("dotenv").config();
 app.use(express.static("public"));
 app.use(express.urlencoded({ extended: true }));
 const ejs = require("ejs");
@@ -13,8 +14,7 @@ const productRouter = require("./routes/product.route");
 app.use("/prod", productRouter);
 app.use("/user", userRouter);
 
-let URI =
-  "mongodb+srv://ayodeleopeyemi09:youngnino@cluster0.xat6w.mongodb.net/jumia_db?retryWrites=true&w=majority&appName=Cluster0";
+let URI = process.env.MONGO_DB_URI;
 mongoose
   .connect(URI)
   .then(() => {

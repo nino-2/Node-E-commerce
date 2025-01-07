@@ -10,7 +10,7 @@ const displayBiodata = (req, res) => {
     .save()
     .then(() => {
       console.log("it has saved");
-      message = "registration  successfull";
+      message = "registration  successful";
       res.redirect("/prod/product");
     })
     .catch((err) => {

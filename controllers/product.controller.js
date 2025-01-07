@@ -1,4 +1,5 @@
 const productModel = require("../models/product.model");
+const nodemailer = require("nodemailer");
 message = "";
 const displayProduct = (req, res) => {
   res.render("product", { message });
@@ -11,6 +12,21 @@ const displayCart = (req, res) => {
   });
 };
 const displayAddup = (req, res) => {
+  var transporter = nodemailer.createTransport({
+    service: "gmail",
+    auth: {
+      user: process.dotenv.GMAIL_USER,
+      pass: process.dotenv.GMAIL_PASS,
+    },
+  });
+
+  var mailOptions = {
+    from: "ayodeleopeyemi09@gmail.com",
+    to: "opeyemimorgan3@gmail.com",
+    subject: `You have created a new product ${req.body.productname} `,
+    html: "<h1 style='background-color: purple;'>Congratulations</h1>",
+  };
+
   console.log(req.body);
   let form = new productModel(req.body);
   form
@@ -18,6 +34,13 @@ const displayAddup = (req, res) => {
     .then(() => {
       console.log("it has saved");
       message = "product added successfully";
+      transporter.sendMail(mailOptions, function (error, info) {
+        if (error) {
+          console.log(error);
+        } else {
+          console.log("Email sent: " + info.response);
+        }
+      });
       res.redirect("/prod/product");
     })
     .catch((err) => {
